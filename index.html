@@ -1,0 +1,1175 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>理実の誕生日旅行</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  /* 紙の旅のしおり。生成りの地に、海の青緑と陸の抹茶。丸ゴシックでやわらかく。 */
+  :root {
+    --paper: #f2f0e6; --card: #fbfaf4; --paper-2: #eae7da;
+    --ink: #3e3a33; --ink-2: #8a857a;
+    --line: #e0dccf; --line-soft: #ebe8dd;
+    --sea: #7fa9bc; --sea-deep: #5b8ba1; --sea-soft: #e4eef2;
+    --leaf: #a7bf8c; --leaf-soft: #ecf1e4;
+    --clay: #c98d6b; --clay-soft: #f6e9e0;
+    --good: #6f9a72;
+    --round: "Zen Maru Gothic", "Hiragino Maru Gothic ProN", sans-serif;
+    --sans: "Zen Kaku Gothic New", "Hiragino Sans", "Noto Sans JP", sans-serif;
+    --r: 14px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #24231f; --card: #2c2b26; --paper-2: #1d1c19;
+      --ink: #eae7dc; --ink-2: #a8a396;
+      --line: #403e37; --line-soft: #37352f;
+      --sea: #8fb8c9; --sea-deep: #a5cadb; --sea-soft: #2b3a41;
+      --leaf: #a7bf8c; --leaf-soft: #333a2c;
+      --clay: #d8a183; --clay-soft: #40312a; --good: #8bb98e;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #24231f; --card: #2c2b26; --paper-2: #1d1c19;
+    --ink: #eae7dc; --ink-2: #a8a396;
+    --line: #403e37; --line-soft: #37352f;
+    --sea: #8fb8c9; --sea-deep: #a5cadb; --sea-soft: #2b3a41;
+    --leaf: #a7bf8c; --leaf-soft: #333a2c;
+    --clay: #d8a183; --clay-soft: #40312a; --good: #8bb98e;
+  }
+  * { box-sizing: border-box; }
+  body { font-family: var(--sans); margin: 0; color: var(--ink); background: var(--paper);
+         line-height: 1.9; letter-spacing: .04em; -webkit-font-smoothing: antialiased; }
+  main { max-width: 780px; margin: 0 auto; padding: 0 18px 90px; display: flex; flex-direction: column; gap: 26px; }
+  section { background: var(--card); border-radius: var(--round); padding: 30px 26px; }
+
+  /* 見出しは小さなタブを添えて、紙面の見出しらしく */
+  h2 { font-family: var(--round); font-size: 21px; font-weight: 700; letter-spacing: .12em;
+       margin: 0 0 22px; color: var(--ink); text-wrap: balance; display: flex;
+       align-items: center; gap: 12px; }
+  h2::before { content: ""; width: 10px; height: 10px; border-radius: 50%;
+               background: var(--sea); flex: none; }
+  h2 .en { font-size: 11px; letter-spacing: .2em; color: var(--sea-deep); font-weight: 500; }
+  h3 { font-family: var(--round); font-size: 14px; font-weight: 700; letter-spacing: .1em;
+       color: var(--ink-2); margin: 26px 0 10px; }
+
+  /* 表紙：生成りの紙に、海と陸のイラスト */
+  .cover { position: relative; overflow: hidden; background: var(--paper-2);
+           padding: 64px 0 0; text-align: center; }
+  .cover-inner { max-width: 780px; margin: 0 auto; padding: 0 26px; position: relative; z-index: 1; }
+  .cover .eyebrow { display: inline-block; font-family: var(--round); font-size: 11px;
+                    letter-spacing: .24em; color: var(--sea-deep); border: 1px solid var(--sea);
+                    border-radius: 999px; padding: 5px 18px; background: var(--card); }
+  .cover h1 { font-family: var(--round); font-size: 34px; font-weight: 700; letter-spacing: .16em;
+              margin: 22px 0 6px; text-wrap: balance; }
+  .cover .sub { color: var(--ink-2); font-size: 13px; letter-spacing: .12em; }
+  .cover .dates { margin-top: 18px; font-family: var(--round); font-size: 15px; letter-spacing: .18em;
+                  font-variant-numeric: tabular-nums; color: var(--ink); }
+  .cover svg { display: block; width: 100%; height: auto; margin-top: 26px; }
+
+  nav { position: sticky; top: 0; z-index: 10; background: var(--paper);
+        border-bottom: 1px solid var(--line); overflow-x: auto; white-space: nowrap;
+        padding: 12px 16px; margin-bottom: 26px; }
+  nav a { font-family: var(--round); color: var(--ink-2); text-decoration: none; font-size: 13px;
+          margin-right: 8px; letter-spacing: .08em; padding: 5px 12px; border-radius: 999px; }
+  nav a:hover, nav a:focus-visible { color: var(--sea-deep); background: var(--sea-soft); }
+
+  /* 概要は罫線の表ではなく、静かな定義リストで */
+  .facts { display: grid; grid-template-columns: 88px 1fr; gap: 12px 18px; font-size: 14px; }
+  .facts dt { font-family: var(--round); font-size: 12px; letter-spacing: .1em; color: var(--ink-2);
+              padding-top: 3px; }
+  .facts dd { margin: 0; }
+
+  /* 全体スケジュールは日ごとのカード */
+  .days { display: grid; gap: 12px; }
+  .daycard { display: grid; grid-template-columns: 76px 1fr; gap: 18px; align-items: start;
+             background: var(--paper); border-radius: 12px; padding: 16px 18px;
+             text-decoration: none; color: inherit; }
+  .daycard:hover { background: var(--sea-soft); }
+  .daycard .no { font-family: var(--round); font-weight: 700; color: var(--sea-deep);
+                 letter-spacing: .08em; line-height: 1.4; }
+  .daycard .no small { display: block; font-size: 11px; color: var(--ink-2); font-weight: 500;
+                       letter-spacing: .06em; }
+  .daycard .plan { font-size: 13.5px; }
+  .daycard .meta { font-size: 12px; color: var(--ink-2); margin-top: 4px; }
+
+  /* 一日の流れ：時刻を左の軸に、予定を丸い節に */
+  .item { display: flex; gap: 18px; padding: 11px 0; position: relative; }
+  .item::before { content: ""; position: absolute; left: 58px; top: 0; bottom: 0; width: 2px;
+                  background: var(--line-soft); border-radius: 2px; }
+  .item:first-of-type::before { top: 16px; }
+  .item:last-of-type::before { bottom: auto; height: 16px; }
+  .time { min-width: 46px; font-family: var(--round); color: var(--ink); font-size: 13px;
+          font-weight: 700; font-variant-numeric: tabular-nums; letter-spacing: .04em; text-align: right; }
+  .time .muted { font-weight: 400; }
+  .item > div:last-child { flex: 1; padding-left: 20px; }
+  .item > .time + div:not(.move)::before { content: ""; position: absolute; left: 54px; top: 19px;
+          width: 10px; height: 10px; border-radius: 50%; background: var(--card);
+          border: 2.5px solid var(--sea); }
+  .move { color: var(--ink-2); font-size: 13px; }
+  .item > .time + div.move::before { content: ""; position: absolute; left: 57.5px; top: 22px;
+          width: 5px; height: 5px; border-radius: 50%; background: var(--line); }
+  .item b { font-family: var(--round); font-weight: 700; letter-spacing: .06em; }
+  .alt { background: var(--sea-soft); border-radius: 10px; padding: 7px 12px; font-size: 12.5px;
+         color: var(--ink-2); margin-top: 8px; }
+  .stay { margin-top: 20px; background: var(--leaf-soft); border-radius: 12px; padding: 14px 18px;
+          font-family: var(--round); font-size: 14px; letter-spacing: .06em; }
+
+  .muted { color: var(--ink-2); font-size: 12.5px; line-height: 1.75; letter-spacing: .03em; }
+  .badge { display: inline-block; font-family: var(--round); font-size: 11px; padding: 2px 10px;
+           border-radius: 999px; background: var(--sea-soft); color: var(--sea-deep);
+           margin-left: 6px; letter-spacing: .06em; }
+  .badge.warn { background: var(--clay-soft); color: var(--clay); }
+  .note { background: var(--clay-soft); border-radius: 12px; padding: 13px 16px; font-size: 13px;
+          color: var(--ink); margin-top: 16px; }
+  .note .muted { color: var(--ink-2); }
+
+  /* カード型のリスト（宿・食事・予約・持ち物） */
+  .cards { display: grid; gap: 12px; }
+  .cards.two { grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); }
+  .tile { background: var(--paper); border-radius: 12px; padding: 16px 18px; }
+  .tile .name { font-family: var(--round); font-weight: 700; letter-spacing: .06em; font-size: 14.5px; }
+  .tile .meta { font-size: 12px; color: var(--ink-2); margin-top: 2px; }
+  .tile dl { display: grid; grid-template-columns: 74px 1fr; gap: 6px 14px; margin: 12px 0 0;
+             font-size: 13px; }
+  .tile dt { font-size: 11.5px; color: var(--ink-2); letter-spacing: .08em; padding-top: 2px; }
+  .tile dd { margin: 0; }
+
+  ul.check { list-style: none; padding-left: 0; margin: 0; display: grid;
+             grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 2px 16px; }
+  ul.check li { padding: 5px 0; font-size: 13.5px; }
+  ul.check input { margin-right: 10px; transform: scale(1.15); accent-color: var(--sea); }
+
+  /* 予算は数字を主役に */
+  .budget-rows { display: grid; gap: 8px; }
+  .brow { display: flex; justify-content: space-between; align-items: baseline;
+          padding: 9px 2px; border-bottom: 1px dashed var(--line); font-size: 14px; }
+  .brow dt { font-family: var(--round); font-size: 13px; letter-spacing: .08em; color: var(--ink-2); }
+  .brow dd { margin: 0; font-variant-numeric: tabular-nums; }
+  .brow.total { border-bottom: none; background: var(--sea-soft); border-radius: 10px;
+                padding: 14px 16px; margin-top: 8px; }
+  .brow.total dt { color: var(--ink); font-size: 14px; }
+  .brow.total dd { font-family: var(--round); font-size: 20px; font-weight: 700; }
+  .diff-ok { color: var(--good); } .diff-ng { color: var(--clay); }
+
+  a { color: var(--sea-deep); word-break: break-all; }
+  :focus-visible { outline: 2px solid var(--sea); outline-offset: 2px; }
+  footer { text-align: center; color: var(--ink-2); font-size: 11.5px; padding: 30px 20px 40px;
+           letter-spacing: .06em; }
+  iframe.map { width: 100%; height: 380px; border: 0; border-radius: 12px; }
+  ul.plain { margin: 0; padding-left: 1.2em; font-size: 13.5px; }
+  ul.plain li { padding: 3px 0; }
+  @media (max-width: 560px) {
+    section { padding: 24px 18px; }
+    .cover h1 { font-size: 27px; }
+    .facts { grid-template-columns: 72px 1fr; }
+    .daycard { grid-template-columns: 62px 1fr; gap: 12px; }
+  }
+  @media print {
+    nav, .no-print { display: none; }
+    section { break-inside: avoid; }
+    .cover { break-after: page; }
+    a { color: inherit; text-decoration: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <div class="cover-inner">
+    <div class="eyebrow">🎂 理実の誕生日</div>
+    <h1>理実の誕生日旅行</h1>
+    <div class="sub">Hiroshima → San'in, 3 nights 4 days</div>
+    <div class="dates">2026-07-18 〜 2026-07-21</div>
+    <div class="sub">3泊4日 ／ 祐天寺駅発 ／ 2名</div>
+  </div>
+  <svg viewBox="0 0 780 150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="海と陸のイラスト">
+    <path d="M0 96 Q 130 74 260 92 T 520 92 T 780 82 L780 150 L0 150 Z" fill="var(--sea-soft)"/>
+    <path d="M0 116 Q 160 98 330 114 T 640 110 T 780 118 L780 150 L0 150 Z" fill="var(--sea)" opacity=".55"/>
+    <path d="M92 128 q 34 -30 76 -10 q 30 -26 66 -4 q 26 -12 44 8 z" fill="var(--leaf)" opacity=".75"/>
+    <path d="M520 130 q 40 -34 84 -12 q 34 -22 68 2 z" fill="var(--leaf)" opacity=".6"/>
+    <g fill="var(--card)" opacity=".9">
+      <ellipse cx="150" cy="40" rx="34" ry="13"/><ellipse cx="176" cy="34" rx="22" ry="11"/>
+      <ellipse cx="606" cy="30" rx="30" ry="12"/><ellipse cx="632" cy="36" rx="20" ry="10"/>
+    </g>
+    <g transform="translate(366 28) rotate(24) scale(0.9)" fill="var(--sea-deep)">
+      <path d="M24 0c1.6 0 2.8 1.7 2.8 3.9v7.2l12.4 7.3v3.6l-12.4-3.6v7.1l4.1 3.1v2.6l-6.9-1.9-6.9 1.9v-2.6l4.1-3.1v-7.1L8.8 22v-3.6l12.4-7.3V3.9C21.2 1.7 22.4 0 24 0z"/>
+    </g>
+  </svg>
+</div>
+
+<nav>
+  <a href="#overview">旅の概要</a>
+  <a href="#schedule">スケジュール</a>
+  <a href="#day1">Day1</a><a href="#day2">Day2</a><a href="#day3">Day3</a><a href="#day4">Day4</a>
+  <a href="#map">地図</a><a href="#hotels">宿</a><a href="#todos">予約</a><a href="#food">食事</a>
+  <a href="#packing">持ち物</a><a href="#budget">予算</a><a href="#emergency">緊急連絡先</a><a href="#rain">雨天</a>
+</nav>
+
+<main>
+
+<section id="overview">
+  <h2>旅の概要 <span class="en">OVERVIEW</span></h2>
+  <dl class="facts">
+    <dt>エリア</dt><dd>広島 → 宮島 → 尾道 → 出雲 → 松江 → 玉造温泉</dd>
+    <dt>日程</dt><dd>2026-07-18 〜 2026-07-21（3泊4日）</dd>
+    <dt>予算</dt><dd>¥200,000</dd>
+    <dt>方針</dt><dd>広島から山陰へ。景色と食事と温泉を、急がずゆっくり味わう3泊4日。</dd>
+  </dl>
+  
+  <div class="note">⚠ 未確認の情報が 100 件あります（営業時間・料金など）。出発前に公式サイトで確認してください。
+    <div class="muted">出雲大社 / 稲佐の浜 / 玉造温泉 / 嚴島神社 / 宮島 表参道商店街 / 宍道湖夕日スポット / 島根県立美術館 / 松江城 ほか</div>
+  </div>
+  
+</section>
+
+<section id="schedule">
+  <h2>スケジュール <span class="en">SCHEDULE</span></h2>
+  <div class="days">
+    
+    <a class="daycard" href="#day1">
+      <div class="no">DAY 1<small>7/18（土）</small></div>
+      <div>
+        <div class="plan">広島平和記念公園 ／ 原爆ドーム ／ 麗ちゃん（ランチ） ／ かき船 かなわ（ディナー）</div>
+        <div class="meta">05:16〜20:00 ／ 広島 ／ 宿：ホテル リッツ 広島店</div>
+      </div>
+    </a>
+    
+    <a class="daycard" href="#day2">
+      <div class="no">DAY 2<small>7/19（日）</small></div>
+      <div>
+        <div class="plan">嚴島神社 ／ 宮島 表参道商店街 ／ あなごめし ふじたや（ランチ） ／ 牡蠣屋</div>
+        <div class="meta">07:30〜12:00 ／ 宮島 ／ 宿：ホテル リッツ 広島店</div>
+      </div>
+    </a>
+    
+    <a class="daycard" href="#day3">
+      <div class="no">DAY 3<small>7/20（月）</small></div>
+      <div>
+        <div class="plan">江島大橋（ベタ踏み坂） ／ 玉造温泉 ／ 松江城 ／ 宍道湖夕日スポット（とるぱ） ／ ランチ（浪花寿司）</div>
+        <div class="meta">08:00〜21:45 ／ 松江 ／ 宿：未定 <span class="badge warn">詰め込み気味</span></div>
+      </div>
+    </a>
+    
+    <a class="daycard" href="#day4">
+      <div class="no">DAY 4<small>7/21（火）</small></div>
+      <div>
+        <div class="plan">足立美術館 ／ 島根ワイナリー ／ 出雲大社 ／ 稲佐の浜 ／ ランチ（回転すし北海道 学園通り店）</div>
+        <div class="meta">08:15〜20:35 ／ 安来 ／ 宿：未定 <span class="badge warn">詰め込み気味</span></div>
+      </div>
+    </a>
+    
+  </div>
+</section>
+
+
+<section id="day1">
+  <h2>Day1 <span class="en">2026-07-18</span></h2>
+  
+    
+    
+      <div class="item"><div class="time">05:16</div>
+        <div class="move">🚃 新横浜 → 広島（のぞみ97号）（約256分）
+        <div class="muted">15号車13番B・C席。自宅05:16発→新横浜06:03発→広島09:32着</div></div></div>
+    
+  
+    
+    
+      <div class="item"><div class="time">09:32</div>
+        <div class="move">🚃 移動（広島駅 → ホテルへ荷物預け）（約28分）
+        </div></div>
+    
+  
+    
+    
+      <div class="item">
+        <div class="time">10:00<br><span class="muted">〜11:00</span></div>
+        <div>
+          <b>広島駅周辺で休憩</b>
+          
+          
+          
+          
+          
+          <div class="muted">ランチまでの余白。暑さ次第で駅ビル内で過ごす</div>
+          
+        </div>
+      </div>
+    
+  
+    
+    
+      <div class="item">
+        <div class="time">11:00<br><span class="muted">〜12:00</span></div>
+        <div>
+          <b>麗ちゃん（ランチ）</b>
+          
+          <span class="badge warn">⚠未確認</span>
+          
+          <span class="badge">¥1,500/人</span>
+          
+          <div class="muted">広島駅ekie内。行列が出る場合あり</div>
+          <div class="alt">☔ 代替案：みっちゃん総本店 八丁堀本店</div>
+        </div>
+      </div>
+    
+  
+    
+    
+      <div class="item"><div class="time">12:00</div>
+        <div class="move">🚃 移動（広島駅 → 平和記念公園）（約20分）
+        </div></div>
+    
+  
+    
+    
+      <div class="item">
+        <div class="time">12:20<br><span class="muted">〜13:20</span></div>
+        <div>
+          <b>広島平和記念公園</b>
+          
+          <span class="badge warn">⚠未確認</span>
+          
+          
+          
+          
+          
+        </div>
+      </div>
+    
+  
+    
+    
+      <div class="item"><div class="time">13:20</div>
+        <div class="move">🚃 移動（約15分）
+        </div></div>
+    
+  
+    
+    
+      <div class="item">
+        <div class="time">13:35<br><span class="muted">〜14:05</span></div>
+        <div>
+          <b>原爆ドーム</b>
+          
+          <span class="badge warn">⚠未確認</span>
+          
+          
+          
+          <div class="muted">平和記念公園とセットで短時間見学</div>
+          
+        </div>
+      </div>
+    
+  
+    
+    
+      <div class="item">
+        <div class="time">18:00<br><span class="muted">〜20:00</span></div>
+        <div>
+          <b>かき船 かなわ（ディナー）</b>
+          
+          <span class="badge warn">⚠未確認</span>
+          <span class="badge">要予約</span>
+          <span class="badge">¥12,000/人</span>
+          <div class="muted">営業 11:00-14:30, 17:00-21:00</div>
+          <div class="muted">川に浮かぶ船上レストラン。要予約</div>
+          
+        </div>
+      </div>
+    
+  
+  <div class="stay">🏨 今夜の宿：ホテル リッツ 広島店 <span class="muted">広島市内 ／ IN ?</span></div>
+  
+  
+</section>
+
+<section id="day2">
+  <h2>Day2 <span class="en">2026-07-19</span></h2>
+  
+    
+    
+      <div class="item"><div class="time">07:30</div>
+        <div class="move">🚃 移動（広島 → 宮島）（約70分）
+        <div class="muted">JR＋フェリー。記帳10:00に間に合う便で</div></div></div>
+    
+  
+    
+    
+      <div class="item">
+        <div class="time">08:45<br><span class="muted">〜10:00</span></div>
+        <div>
+          <b>嚴島神社</b>
+          
+          <span class="badge warn">⚠未確認</span>
+          
+          
+          
+          <div class="muted">混雑前の朝いちで参拝</div>
+          
+        </div>
+      </div>
+    
+  
+    
+    
+      <div class="item">
+        <div class="time">10:00<br><span class="muted">〜10:10</span></div>
+        <div>
+          <b>あなごめし ふじたや 記帳</b>
+          
+          
+          
+          
+          
+          <div class="muted">10:00に記帳し、11:00の入店枠を確保する</div>
+          
+        </div>
+      </div>
+    
+  
+    
+    
+      <div class="item">
+        <div class="time">10:10<br><span class="muted">〜11:00</span></div>
+        <div>
+          <b>宮島 表参道商店街</b>
+          
+          <span class="badge warn">⚠未確認</span>
+          
+          
+          
+          <div class="muted">記帳から入店までの時間で食べ歩き・買い物</div>
+          
+        </div>
+      </div>
+    
+  
+    
+    
+      <div class="item">
+        <div class="time">11:00<br><span class="muted">〜12:00</span></div>
+        <div>
+          <b>あなごめし ふじたや（ランチ）</b>
+          
+          <span class="badge warn">⚠未確認</span>
+          <span class="badge">要予約</span>
+          <span class="badge">¥3,000/人</span>
+          
+          <div class="muted">10:00記帳→11:00入店の予定</div>
+          
+        </div>
+      </div>
+    
+  
+    
+    
+      <div class="item">
+        <div class="time">12:00</div>
+        <div>
+          <b>以降フリー（宮島散策）</b>
+          
+          
+          
+          
+          
+          <div class="muted">弥山ロープウェイ・牡蠣屋など。夕方までに広島へ戻る</div>
+          <div class="alt">☔ 代替案：牡蠣屋</div>
+        </div>
+      </div>
+    
+  
+    
+    
+      <div class="item">
+        <div class="time">　</div>
+        <div>
+          <b>牡蠣屋</b>
+          
+          <span class="badge warn">⚠未確認</span>
+          
+          <span class="badge">¥3,000/人</span>
+          <div class="muted">営業 10:00-18:00頃</div>
+          <div class="muted">表参道の牡蠣専門店。時間が合えば</div>
+          
+        </div>
+      </div>
+    
+  
+  <div class="stay">🏨 今夜の宿：ホテル リッツ 広島店 <span class="muted">広島市内 ／ IN ?</span></div>
+  
+  
+</section>
+
+<section id="day3">
+  <h2>Day3 <span class="en">2026-07-20</span></h2>
+  
+    
+    
+      <div class="item"><div class="time">08:00</div>
+        <div class="move">🚃 広島 → 松江（高速バス）（約200分）
+        <div class="muted">未予約。朝発の便の時刻・運賃を公式で要確認</div></div></div>
+    
+  
+    
+    
+      <div class="item"><div class="time">11:30</div>
+        <div class="move">🚃 レンタカー受取（トヨタレンタカー 松江駅南店）（約30分）
+        <div class="muted">未予約。7/21に出雲空港で乗り捨て</div></div></div>
+    
+  
+    
+    
+      <div class="item">
+        <div class="time">12:00<br><span class="muted">〜13:00</span></div>
+        <div>
+          <b>ランチ（浪花寿司）</b>
+          
+          <span class="badge warn">⚠未確認</span>
+          
+          <span class="badge">¥3,000/人</span>
+          
+          <div class="muted">松江駅周辺。二択：浪花寿司（寿司）／出雲そば きがる。営業時間・定休日は未確認</div>
+          <div class="alt">☔ 代替案：出雲そば きがる</div>
+        </div>
+      </div>
+    
+  
+    
+    
+      <div class="item"><div class="time">13:00</div>
+        <div class="move">🚃 移動（松江 → 江島大橋）（約40分）
+        </div></div>
+    
+  
+    
+    
+      <div class="item">
+        <div class="time">13:40<br><span class="muted">〜14:10</span></div>
+        <div>
+          <b>江島大橋（ベタ踏み坂）</b>
+          
+          <span class="badge warn">⚠未確認</span>
+          
+          
+          
+          <div class="muted">松江側（八束町）から見上げる構図が有名。駐車スペースが限られるため停める場所に注意</div>
+          
+        </div>
+      </div>
+    
+  
+    
+    
+      <div class="item"><div class="time">14:10</div>
+        <div class="move">🚃 移動（江島大橋 → 玉造温泉）（約50分）
+        </div></div>
+    
+  
+    
+    
+      <div class="item">
+        <div class="time">15:00<br><span class="muted">〜16:15</span></div>
+        <div>
+          <b>玉造温泉</b>
+          
+          <span class="badge warn">⚠未確認</span>
+          
+          
+          
+          <div class="muted">温泉街の散策・足湯。猛暑期なので日中の屋外歩きは短めに</div>
+          
+        </div>
+      </div>
+    
+  
+    
+    
+      <div class="item"><div class="time">16:15</div>
+        <div class="move">🚃 移動（玉造温泉 → 松江城）（約30分）
+        </div></div>
+    
+  
+    
+    
+      <div class="item">
+        <div class="time">16:45<br><span class="muted">〜17:45</span></div>
+        <div>
+          <b>松江城</b>
+          
+          <span class="badge warn">⚠未確認</span>
+          
+          
+          
+          <div class="muted">夏期は天守の最終受付が早いため、当日の受付終了時刻を要確認（間に合わない場合は堀川めぐりや周辺散策に切替）</div>
+          
+        </div>
+      </div>
+    
+  
+    
+    
+      <div class="item"><div class="time">17:45</div>
+        <div class="move">🚃 移動・休憩（松江城 → 宍道湖畔）（約40分）
+        <div class="muted">夕日まで少し余白。カフェ休憩や県立美術館側での時間調整に使える</div></div></div>
+    
+  
+    
+    
+      <div class="item">
+        <div class="time">18:25<br><span class="muted">〜19:35</span></div>
+        <div>
+          <b>宍道湖夕日スポット（とるぱ）</b>
+          
+          <span class="badge warn">⚠未確認</span>
+          
+          
+          
+          <div class="muted">2026-07-20 の松江の日没は19:25頃（要確認）。日没1時間前の18:25着で場所を確保。雨天・曇天時は代替案へ</div>
+          
+        </div>
+      </div>
+    
+  
+    
+    
+      
+    
+  
+    
+    
+      <div class="item">
+        <div class="time">21:45</div>
+        <div>
+          <b>ホテル チェックイン（松江・玉造）</b>
+          
+          
+          <span class="badge">要予約</span>
+          
+          
+          <div class="muted">7/20泊の宿が未定。誕生日当日の宿なので早めに押さえたい。松江市街または玉造温泉が候補</div>
+          
+        </div>
+      </div>
+    
+  
+  
+  
+  <div class="note">⚠ 詰め込みすぎの可能性：予定 9.1時間 ＞ 目安 8.2時間</div>
+  
+  
+</section>
+
+<section id="day4">
+  <h2>Day4 <span class="en">2026-07-21</span></h2>
+  
+    
+    
+      <div class="item"><div class="time">08:15</div>
+        <div class="move">🚃 移動（ホテル → 足立美術館）（約45分）
+        <div class="muted">8:15にホテル出発。開館9:00に合わせて到着</div></div></div>
+    
+  
+    
+    
+      <div class="item">
+        <div class="time">09:00<br><span class="muted">〜11:15</span></div>
+        <div>
+          <b>足立美術館</b>
+          
+          <span class="badge warn">⚠未確認</span>
+          
+          
+          
+          <div class="muted">開館直後の9:00入場、11:15出発。庭園と横山大観コレクション</div>
+          
+        </div>
+      </div>
+    
+  
+    
+    
+      <div class="item"><div class="time">11:15</div>
+        <div class="move">🚃 移動（安来 → 松江）（約45分）
+        </div></div>
+    
+  
+    
+    
+      <div class="item">
+        <div class="time">12:00<br><span class="muted">〜13:00</span></div>
+        <div>
+          <b>ランチ（回転すし北海道 学園通り店）</b>
+          
+          <span class="badge warn">⚠未確認</span>
+          
+          <span class="badge">¥3,000/人</span>
+          
+          <div class="muted">松江・学園通り。人気店のため待ち時間が出る可能性あり。営業時間は未確認</div>
+          <div class="alt">☔ 代替案：荒木屋（出雲そば） / 献上そば 羽根屋 本店</div>
+        </div>
+      </div>
+    
+  
+    
+    
+      <div class="item"><div class="time">13:00</div>
+        <div class="move">🚃 移動（松江 → 島根ワイナリー）（約55分）
+        </div></div>
+    
+  
+    
+    
+      <div class="item">
+        <div class="time">13:55<br><span class="muted">〜14:25</span></div>
+        <div>
+          <b>島根ワイナリー</b>
+          
+          <span class="badge warn">⚠未確認</span>
+          
+          
+          
+          <div class="muted">出雲大社への道中に短時間だけ立ち寄る。運転者は試飲不可。時間が押していれば省略</div>
+          <div class="alt">☔ 代替案：省略して出雲大社へ直行</div>
+        </div>
+      </div>
+    
+  
+    
+    
+      <div class="item"><div class="time">14:25</div>
+        <div class="move">🚃 移動（島根ワイナリー → 出雲大社）（約15分）
+        </div></div>
+    
+  
+    
+    
+      <div class="item">
+        <div class="time">14:40<br><span class="muted">〜17:05</span></div>
+        <div>
+          <b>出雲大社</b>
+          
+          <span class="badge warn">⚠未確認</span>
+          
+          
+          
+          <div class="muted">旅のハイライト。参拝・境内散策・神門通り。時間に余裕があるので押した分の吸収先にもなる</div>
+          
+        </div>
+      </div>
+    
+  
+    
+    
+      <div class="item"><div class="time">17:05</div>
+        <div class="move">🚃 移動（出雲大社 → 稲佐の浜）（約15分）
+        </div></div>
+    
+  
+    
+    
+      <div class="item">
+        <div class="time">17:20<br><span class="muted">〜17:50</span></div>
+        <div>
+          <b>稲佐の浜</b>
+          
+          <span class="badge warn">⚠未確認</span>
+          
+          
+          
+          <div class="muted">17:20着・17:50発。弁天島と砂浜。日没前だが空港への時間を優先する</div>
+          
+        </div>
+      </div>
+    
+  
+    
+    
+      <div class="item"><div class="time">17:50</div>
+        <div class="move">🚃 移動（稲佐の浜 → 出雲縁結び空港）／レンタカー乗り捨て（約30分）
+        <div class="muted">18:20着予定。給油と返却の時間を見込む</div></div></div>
+    
+  
+    
+    
+      <div class="item"><div class="time">19:05</div>
+        <div class="move">🚃 出雲縁結び空港 → 東京/羽田（JAL286）（約90分）
+        <div class="muted">予約確定。JAL286・おとな2名・46000円</div></div></div>
+    
+  
+  
+  
+  <div class="note">⚠ 詰め込みすぎの可能性：予定 10.1時間 ＞ 目安 8.2時間</div>
+  
+  
+</section>
+
+
+<section id="map">
+  <h2>地図 <span class="en">MAP</span></h2>
+  
+  <iframe class="map no-print" src="https://www.google.com/maps/d/embed?mid=1u1mFZ5mAd8fxwiH_t1S5K0g37RC7WN0" loading="lazy"></iframe>
+  
+  
+  <p><a href="https://www.google.com/maps/d/viewer?mid=1u1mFZ5mAd8fxwiH_t1S5K0g37RC7WN0" target="_blank">📍 Google My Maps で開く（Google Mapsアプリ対応）</a></p>
+  
+  <p class="muted no-print">オフライン時は事前に Google Maps アプリでエリアをダウンロードしておくと安心です。詳細な候補地マップは output/map.html でも確認できます。</p>
+  
+  <div class="note">⚠ 同じ日の候補で離れているもの
+    <ul class="plain"><li>Day4: 出雲大社 〜 足立美術館（直線 約46.7km）</li><li>Day4: 出雲大社 〜 回転すし北海道 学園通り店（直線 約35.9km）</li><li>Day4: 稲佐の浜 〜 足立美術館（直線 約48.2km）</li><li>Day4: 稲佐の浜 〜 回転すし北海道 学園通り店（直線 約37.5km）</li><li>Day4: 足立美術館 〜 島根ワイナリー（直線 約44.5km）</li><li>Day4: 島根ワイナリー 〜 回転すし北海道 学園通り店（直線 約34.6km）</li></ul>
+  </div>
+  
+</section>
+
+<section id="hotels">
+  <h2>宿泊先 <span class="en">STAY</span></h2>
+  <div class="cards">
+    
+    <div class="tile">
+      <div class="name">ホテル リッツ 広島店</div>
+      <div class="meta">2026-07-18 ・ 2026-07-19</div>
+      <dl>
+        <dt>住所</dt><dd>広島県広島市南区比治山町2-16</dd>
+        <dt>IN / OUT</dt><dd>? / ?</dd>
+        <dt>料金</dt><dd>¥13,300/泊</dd>
+        
+        
+        
+        
+        
+        
+        <dt>メモ</dt><dd class="muted">予約確定（電話・担当:畑、2泊可の確認済み）。1泊12900円＋400円＝13300円 × 2泊 ＝ 26600円。チェックイン時刻は未確認</dd>
+      </dl>
+    </div>
+    
+  </div>
+  
+</section>
+
+<section id="todos">
+  <h2>予約・ToDo <span class="en">TO DO</span></h2>
+  <ul class="check">
+    
+    <li><label><input type="checkbox" data-key="todo:0cae68b3-ca17-4639-9e9b-76a7f21283d0" checked>7/18泊（Day1）の宿を決めて予約する</label>
+      <div class="muted">期限 2026-07-05 ／ リッツ広島店で予約確定（電話・担当:畑）。1泊13300円×2泊＝26600円
+        </div>
+    </li>
+    
+    <li><label><input type="checkbox" data-key="todo:83caf506-1b5d-4d7f-953f-a4a851b35ce6" checked>7/19泊（Day2）の宿を決めて予約する</label>
+      <div class="muted">期限 2026-07-05 ／ リッツ広島店で予約確定（電話・担当:畑）。1泊13300円×2泊＝26600円
+        </div>
+    </li>
+    
+    <li><label><input type="checkbox" data-key="todo:687b7c88-e4e2-40c0-a6b0-330a03059f9a" >7/20泊（Day3）の宿を決めて予約する</label>
+      <div class="muted">期限 2026-07-05 ／ 候補は比較表（output/compare_hotels.html）参照。決めたら spots_hotel.csv の stay_date に日付を記入
+        </div>
+    </li>
+    
+    <li><label><input type="checkbox" data-key="todo:57eacf12-2b26-499a-bcd1-46fceb21c173" >かき船 かなわ の予約</label>
+      <div class="muted">期限 2026-07-05 ／ 平和公園そば・川に浮かぶ船上レストラン。初日の夜を特別にする候補
+        <br><a href="https://www.kanawa.co.jp/">予約先</a></div>
+    </li>
+    
+    <li><label><input type="checkbox" data-key="todo:c531bbb6-668b-4ea7-b8f5-7fd777c172a1" >未確認情報（営業時間・定休日・料金）の公式サイト確認</label>
+      <div class="muted">期限 2026-07-11
+        </div>
+    </li>
+    
+    <li><label><input type="checkbox" data-key="todo:675d1268-118f-4cc6-a202-f97585ae4b83" >天気予報の確認と持ち物の最終調整</label>
+      <div class="muted">期限 2026-07-15
+        </div>
+    </li>
+    
+    <li><label><input type="checkbox" data-key="todo:d3adac64-f305-4164-8985-2dac66317d72" >高速バス（広島駅→松江駅・7/20朝）の予約</label>
+      <div class="muted">期限 2026-07-16 ／ 朝発の便の時刻・運賃を公式で確認して予約する。便数が少ないため早めに。所要3時間20分前後の想定
+        <br><a href="https://www.chugoku-jrbus.co.jp/">予約先</a></div>
+    </li>
+    
+    <li><label><input type="checkbox" data-key="todo:4ab73309-d6e9-4c98-a1e9-77818b009906" >レンタカー（7/20松江受取→7/21出雲空港乗り捨て）の予約</label>
+      <div class="muted">期限 2026-07-16 ／ 乗り捨て可のプランで予約。江島大橋・足立美術館・稲佐の浜を回るため車が前提。乗り捨て料金を確認
+        </div>
+    </li>
+    
+  </ul>
+</section>
+
+<section id="food">
+  <h2>食事 <span class="en">FOOD</span></h2>
+  <div class="cards two">
+    
+    <div class="tile">
+      <div class="name">みっちゃん総本店 八丁堀本店 <span class="badge warn">⚠</span></div>
+      <div class="meta">広島市内
+        ／ ¥1,500/人</div>
+      <div class="muted">広島お好み焼きの元祖格。行列は回転早め</div>
+    </div>
+    
+    <div class="tile">
+      <div class="name">かき船 かなわ <span class="badge warn">⚠</span></div>
+      <div class="meta">広島市内 ／ Day1
+        ／ ¥12,000/人 <span class="badge">要予約</span></div>
+      <div class="muted">平和公園そば・川に浮かぶ船上レストラン。初日の夜を特別にする候補</div>
+    </div>
+    
+    <div class="tile">
+      <div class="name">あなごめし うえの 宮島口本店 <span class="badge warn">⚠</span></div>
+      <div class="meta">宮島
+        ／ ¥2,800/人</div>
+      <div class="muted">行列必至・予約不可。並びたくなければ弁当をフェリーで</div>
+    </div>
+    
+    <div class="tile">
+      <div class="name">牡蠣屋 <span class="badge warn">⚠</span></div>
+      <div class="meta">宮島 ／ Day2
+        ／ ¥3,000/人</div>
+      <div class="muted">表参道の牡蠣専門店。白ワインあり</div>
+    </div>
+    
+    <div class="tile">
+      <div class="name">荒木屋 <span class="badge warn">⚠</span></div>
+      <div class="meta">出雲
+        ／ ¥1,200/人</div>
+      <div class="muted">出雲大社徒歩圏の老舗。縁結びセットが誕生日旅と好相性</div>
+    </div>
+    
+    <div class="tile">
+      <div class="name">献上そば 羽根屋 本店 <span class="badge warn">⚠</span></div>
+      <div class="meta">出雲
+        ／ ¥1,500/人</div>
+      <div class="muted">出雲市駅側。荒木屋と行程で使い分け</div>
+    </div>
+    
+    <div class="tile">
+      <div class="name">庭園茶寮 みな美（皆美館） <span class="badge warn">⚠</span></div>
+      <div class="meta">松江
+        ／ ¥6,000/人 <span class="badge">要予約</span></div>
+      <div class="muted">宍道湖畔の老舗。名物・鯛めし。窓側席なら湖景。誕生日ランチ/ディナー候補</div>
+    </div>
+    
+    <div class="tile">
+      <div class="name">川京 <span class="badge warn">⚠</span></div>
+      <div class="meta">松江
+        ／ ¥7,000/人 <span class="badge">要予約</span></div>
+      <div class="muted">うなぎ・宍道湖七珍の名物居酒屋。席数少なく予約必須</div>
+    </div>
+    
+    <div class="tile">
+      <div class="name">浪花寿司 <span class="badge warn">⚠</span></div>
+      <div class="meta">松江 ／ Day3
+        ／ -/人</div>
+      <div class="muted">松江の老舗寿司。Day3ランチ候補。営業時間・定休日は未確認</div>
+    </div>
+    
+    <div class="tile">
+      <div class="name">出雲そば きがる <span class="badge warn">⚠</span></div>
+      <div class="meta">松江
+        ／ -/人</div>
+      <div class="muted">松江の出雲そば。Day3ランチ候補（浪花寿司との二択）。営業時間・定休日は未確認</div>
+    </div>
+    
+    <div class="tile">
+      <div class="name">回転すし北海道 学園通り店 <span class="badge warn">⚠</span></div>
+      <div class="meta">松江 ／ Day4
+        ／ -/人</div>
+      <div class="muted">出雲ではなく松江の店。Day4は足立美術館（安来）から出雲大社へ向かう道中に位置する。人気店のため待ち時間に注意</div>
+    </div>
+    
+    <div class="tile">
+      <div class="name">麗ちゃん <span class="badge warn">⚠</span></div>
+      <div class="meta">広島 ／ Day1
+        ／ -/人</div>
+      <div class="muted">広島駅ekie 1F のお好み焼き。Day1の11:00ランチ。営業時間・待ち時間は未確認</div>
+    </div>
+    
+    <div class="tile">
+      <div class="name">あなごめし ふじたや <span class="badge warn">⚠</span></div>
+      <div class="meta">宮島 ／ Day2
+        ／ -/人 <span class="badge">要予約</span></div>
+      <div class="muted">10:00に記帳して11:00入店の予定。記帳のため朝のうちに店へ立ち寄る</div>
+    </div>
+    
+    <div class="tile">
+      <div class="name">一平や <span class="badge warn">⚠</span></div>
+      <div class="meta">広島 ／ Day1・Day2
+        ／ -/人</div>
+      <div class="muted">広島駅近くの居酒屋。7/18〜19の夕食候補。営業時間・予約要否は未確認</div>
+    </div>
+    
+    <div class="tile">
+      <div class="name">くにまつ 本店 <span class="badge warn">⚠</span></div>
+      <div class="meta">広島 ／ Day1・Day2
+        ／ -/人</div>
+      <div class="muted">広島名物の汁なし担担麺。7/18〜19の夕食候補。軽めに済ませたい日向き</div>
+    </div>
+    
+    <div class="tile">
+      <div class="name">お好み焼き 八昌 <span class="badge warn">⚠</span></div>
+      <div class="meta">広島 ／ Day1・Day2
+        ／ -/人</div>
+      <div class="muted">広島お好み焼きの名店。7/18〜19の夕食候補。行列が出やすい</div>
+    </div>
+    
+    <div class="tile">
+      <div class="name">お好み焼 ねぎ庵 紙屋町店 <span class="badge warn">⚠</span></div>
+      <div class="meta">広島 ／ Day1・Day2
+        ／ -/人</div>
+      <div class="muted">紙屋町。平和記念公園から近い。7/18〜19の夕食候補</div>
+    </div>
+    
+  </div>
+</section>
+
+<section id="packing">
+  <h2>持ち物チェック <span class="en">PACKING</span></h2>
+  
+  <h3>お金</h3>
+  <ul class="check">
+    
+    <li><label><input type="checkbox" data-key="財布・現金" >財布・現金<span class="badge">人数分</span></label></li>
+    
+    <li><label><input type="checkbox" data-key="クレジットカード" >クレジットカード<span class="badge">人数分</span></label></li>
+    
+    <li><label><input type="checkbox" data-key="交通系IC・きっぷ類" >交通系IC・きっぷ類<span class="badge">人数分</span></label></li>
+    
+  </ul>
+  
+  <h3>書類・貴重品</h3>
+  <ul class="check">
+    
+    <li><label><input type="checkbox" data-key="運転免許証" >運転免許証 <span class="muted">レンタカー利用時は必須</span></label></li>
+    
+    <li><label><input type="checkbox" data-key="健康保険証" >健康保険証<span class="badge">人数分</span></label></li>
+    
+    <li><label><input type="checkbox" data-key="宿・列車の予約確認書" >宿・列車の予約確認書</label></li>
+    
+  </ul>
+  
+  <h3>ガジェット</h3>
+  <ul class="check">
+    
+    <li><label><input type="checkbox" data-key="スマートフォン" >スマートフォン<span class="badge">人数分</span></label></li>
+    
+    <li><label><input type="checkbox" data-key="充電器・ケーブル" >充電器・ケーブル</label></li>
+    
+    <li><label><input type="checkbox" data-key="モバイルバッテリー" >モバイルバッテリー <span class="muted">地図・撮影で消耗大</span></label></li>
+    
+    <li><label><input type="checkbox" data-key="カメラ" >カメラ</label></li>
+    
+  </ul>
+  
+  <h3>衣類</h3>
+  <ul class="check">
+    
+    <li><label><input type="checkbox" data-key="着替え（日数分）" >着替え（日数分）<span class="badge">人数分</span></label></li>
+    
+    <li><label><input type="checkbox" data-key="羽織りもの" >羽織りもの<span class="badge">人数分</span> <span class="muted">冷房・朝晩対策</span></label></li>
+    
+    <li><label><input type="checkbox" data-key="歩きやすい靴" >歩きやすい靴<span class="badge">人数分</span></label></li>
+    
+    <li><label><input type="checkbox" data-key="帽子" >帽子<span class="badge">人数分</span></label></li>
+    
+    <li><label><input type="checkbox" data-key="きれいめの服" >きれいめの服<span class="badge">人数分</span> <span class="muted">ディナー用</span></label></li>
+    
+  </ul>
+  
+  <h3>洗面・ケア</h3>
+  <ul class="check">
+    
+    <li><label><input type="checkbox" data-key="歯ブラシ・洗面用具" >歯ブラシ・洗面用具</label></li>
+    
+    <li><label><input type="checkbox" data-key="スキンケア用品" >スキンケア用品</label></li>
+    
+    <li><label><input type="checkbox" data-key="日焼け止め" >日焼け止め</label></li>
+    
+    <li><label><input type="checkbox" data-key="虫除け" >虫除け</label></li>
+    
+    <li><label><input type="checkbox" data-key="タオル（温泉用）" >タオル（温泉用） <span class="muted">宿にある場合は不要</span></label></li>
+    
+  </ul>
+  
+  <h3>健康・薬</h3>
+  <ul class="check">
+    
+    <li><label><input type="checkbox" data-key="常備薬" >常備薬<span class="badge">人数分</span></label></li>
+    
+    <li><label><input type="checkbox" data-key="絆創膏" >絆創膏</label></li>
+    
+    <li><label><input type="checkbox" data-key="酔い止め" >酔い止め <span class="muted">船・バス移動がある場合</span></label></li>
+    
+    <li><label><input type="checkbox" data-key="冷却シート・塩分タブレット" >冷却シート・塩分タブレット</label></li>
+    
+  </ul>
+  
+  <h3>天候対策</h3>
+  <ul class="check">
+    
+    <li><label><input type="checkbox" data-key="折りたたみ傘" >折りたたみ傘</label></li>
+    
+    <li><label><input type="checkbox" data-key="扇子・ハンディファン" >扇子・ハンディファン</label></li>
+    
+  </ul>
+  
+  <h3>その他</h3>
+  <ul class="check">
+    
+    <li><label><input type="checkbox" data-key="エコバッグ" >エコバッグ <span class="muted">お土産用</span></label></li>
+    
+    <li><label><input type="checkbox" data-key="プレゼント・カード" >プレゼント・カード <span class="muted">事前準備。忘れると取り返しがつかない</span></label></li>
+    
+  </ul>
+  
+</section>
+
+<section id="budget">
+  <h2>予算 <span class="en">BUDGET</span></h2>
+  <dl class="budget-rows">
+    <div class="brow"><dt>宿泊費</dt><dd>¥26,600</dd></div><div class="brow"><dt>交通費</dt><dd>¥113,860</dd></div><div class="brow"><dt>食費</dt><dd>¥51,000</dd></div><div class="brow"><dt>観光費</dt><dd>¥14,000</dd></div>
+    <div class="brow total"><dt>合計</dt><dd>¥205,460</dd></div>
+    <div class="brow"><dt>1人あたり</dt><dd>¥102,730</dd></div>
+    <div class="brow"><dt>1日あたり</dt><dd>¥51,365</dd></div>
+    <div class="brow"><dt>予算</dt><dd>¥200,000</dd></div>
+    <div class="brow"><dt>予算との差</dt>
+      <dd class="diff-ng">¥-5,460（予算オーバー）</dd></div>
+  </dl>
+  <p class="muted">確定分 ¥111,460 ／ 概算分 ¥94,000。概算は変わる可能性があります。</p>
+</section>
+
+<section id="emergency">
+  <h2>緊急連絡先 <span class="en">CONTACT</span></h2>
+  
+  <p class="muted">trip.yaml の book.emergency_contacts に宿・保険・家族などの連絡先を登録できます。</p>
+  
+</section>
+
+<section id="rain">
+  <h2>雨のときは <span class="en">RAINY DAY</span></h2>
+  <ul class="plain"><li>Day1 麗ちゃん（ランチ） → みっちゃん総本店 八丁堀本店</li><li>Day2 以降フリー（宮島散策） → 牡蠣屋</li><li>Day3 ランチ（浪花寿司） → 出雲そば きがる</li><li>Day4 ランチ（回転すし北海道 学園通り店） → 荒木屋（出雲そば）</li><li>Day4 ランチ（回転すし北海道 学園通り店） → 献上そば 羽根屋 本店</li><li>Day4 島根ワイナリー → 省略して出雲大社へ直行</li></ul>
+  
+  <h3>雨でも楽しめる候補</h3>
+  <ul class="plain"><li>出雲大社（出雲・一部屋外）</li><li>玉造温泉（玉造）</li><li>嚴島神社（宮島・一部屋外）</li><li>宮島 表参道商店街（宮島）</li><li>島根県立美術館（松江）</li><li>松江城（松江・一部屋外）</li><li>ぐるっと松江堀川めぐり（松江）</li><li>広島平和記念公園（広島市内・一部屋外）</li><li>原爆ドーム（広島市内・一部屋外）</li><li>尾道 千光寺公園（尾道・一部屋外）</li><li>猫の細道（尾道・一部屋外）</li><li>足立美術館（安来）</li><li>日御碕神社（出雲・一部屋外）</li><li>八重垣神社（松江・一部屋外）</li><li>木綿街道（出雲・一部屋外）</li><li>石見銀山（大田・一部屋外）</li><li>江島大橋（ベタ踏み坂）（松江・一部屋外）</li><li>須佐神社（出雲・一部屋外）</li><li>島根ワイナリー（出雲）</li><li>みっちゃん総本店 八丁堀本店（広島市内）</li><li>かき船 かなわ（広島市内）</li><li>あなごめし うえの 宮島口本店（宮島）</li><li>牡蠣屋（宮島）</li><li>尾道ラーメン つたふじ（尾道）</li><li>荒木屋（出雲）</li><li>献上そば 羽根屋 本店（出雲）</li><li>庭園茶寮 みな美（皆美館）（松江）</li><li>川京（松江）</li></ul>
+  
+  
+</section>
+
+
+
+</main>
+
+<footer>2026年7月_理実誕生日旅行 ／ 生成: 2026-07-14 23:48 ／ ⚠マークは未確認情報です。公式サイトで最新情報をご確認ください。</footer>
+
+<script>
+// 持ち物・ToDoチェックの状態をブラウザに保存（localStorage）
+const KEY = "packing:2026-07-satomi-birthday";
+const saved = JSON.parse(localStorage.getItem(KEY) || "{}");
+document.querySelectorAll('input[type=checkbox][data-key]').forEach(cb => {
+  if (saved[cb.dataset.key] !== undefined) cb.checked = saved[cb.dataset.key];
+  cb.addEventListener("change", () => {
+    saved[cb.dataset.key] = cb.checked;
+    localStorage.setItem(KEY, JSON.stringify(saved));
+  });
+});
+</script>
+</body>
+</html>
